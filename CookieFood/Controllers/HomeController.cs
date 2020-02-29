@@ -15,28 +15,29 @@ namespace TOS.Controllers
 
         public ActionResult Principal()
         {
-            if (Request.Cookies["MyUsername"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("PanelLogin");
-            }
+            //if (Request.Cookies["MyUsername"] != null)
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    return RedirectToAction("PanelLogin");
+            //}
+            return View();
         }
         [HttpGet]
         public JsonResult ValidaTipoUsuario()
         {
-            var cookievalue = Request.Cookies["MyUsername"].Value.ToString();
-            var query = db.Users.Where(x => x.USERNAME == cookievalue).Select(z => new { ROL = z.TYPE_USER }).FirstOrDefault();
-            return Json(query, JsonRequestBehavior.AllowGet);
+            //var cookievalue = Request.Cookies["MyUsername"].Value.ToString();
+            //var query = db.Users.Where(x => x.USERNAME == cookievalue).Select(z => new { ROL = z.TYPE_USER }).FirstOrDefault();
+            return Json(new { ROL= 0 }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetName()
         {
-            var cookievalue = Request.Cookies["MyName"].Value.ToString();
-            return Json(cookievalue, JsonRequestBehavior.AllowGet);
+            //var cookievalue = Request.Cookies["MyName"].Value.ToString();
+            return Json("Username", JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
