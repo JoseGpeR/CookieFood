@@ -791,6 +791,20 @@
     <Content Include="Models\Datos\Database.edmx.diagram">
       <DependentUpon>Database.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bower_components\scss\font-awesome.scss" />
+    <Content Include="Content\bower_components\scss\_animated.scss" />
+    <Content Include="Content\bower_components\scss\_bordered-pulled.scss" />
+    <Content Include="Content\bower_components\scss\_core.scss" />
+    <Content Include="Content\bower_components\scss\_fixed-width.scss" />
+    <Content Include="Content\bower_components\scss\_icons.scss" />
+    <Content Include="Content\bower_components\scss\_larger.scss" />
+    <Content Include="Content\bower_components\scss\_list.scss" />
+    <Content Include="Content\bower_components\scss\_mixins.scss" />
+    <Content Include="Content\bower_components\scss\_path.scss" />
+    <Content Include="Content\bower_components\scss\_rotated-flipped.scss" />
+    <Content Include="Content\bower_components\scss\_screen-reader.scss" />
+    <Content Include="Content\bower_components\scss\_stacked.scss" />
+    <Content Include="Content\bower_components\scss\_variables.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -875,6 +889,13 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+</Target>
   <Target Name="AfterBuild">
   </Target> -->
 </Project>
