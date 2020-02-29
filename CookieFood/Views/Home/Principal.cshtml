@@ -1,0 +1,45 @@
+﻿
+<div class="wrapper">
+    @Html.Partial("_HeaderNAside")
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="height:100%">
+        <div id="toast"></div>
+        <div id="toastInsert">¡Auditoría registrada!</div>
+        <div id="toastError">¡Ups! No se encontró el team escaneado</div>
+        <div id="ToastIncompletForm">Por favor, completa la auditoría</div>
+        <div id="ToastNullInformation">¡Ups! No existe ese registro</div>
+        <div id="ToastFaltaFirma">Falta que se firme la auditoría</div>
+        <div id="ToastFirmaCorrecta">¡Firma registrada!</div>
+        <div id="toastIncorrectfirma">¡Ups! Usuario/Contraseña incorrectos. <br /> Unicamente firman los TL</div>
+        <div id="ToastErrorFatal">¡Ups! Hubo un error. <br />Verifique todo</div>
+        <div id="ToastUserAdd">¡Usuario Actualizado!</div>
+        <div id="ToastUserDelete">¡Usuario Eliminado!</div>
+        <div style="padding-top: 1%; margin-top: 50px;">
+            <div id="Content">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- Default to the left -->
+        <strong>Copyright © 2019 <b style="color:deepskyblue">CookieFood</b>.</strong> All rights reserved.
+    </footer>
+</div>
+<script>
+    var url = '/Home/ValidaTipoUsuario';
+    $.get(url).done(function (data) {
+        document.getElementById("linkAuditorias").style.display = "block"
+        //document.getElementById("linkAudDTL").innerHTML = '<a href="#" onclick="muestraPanelTLA();"><i class="fa fa-truck"></i><span>Auditorías diarias de TL</span></a>';
+        //document.getElementById("linkAudB2B").innerHTML = '<a href="#" onclick="muestraPanelB2B();"><i class="fa fa-truck"></i><span>Auditorías B2B</span></a>';
+        //document.getElementById("linkAudLNS").innerHTML = '<a href="#" onclick="muestraPanelLNS();"><i class="fa fa-truck"></i><span>Auditorías Look & See</span></a>';
+        if (data.ROL == 0) {
+            document.getElementById("linkAuditorias").style.display = "block"
+            document.getElementById("opcionesAdmin").style.display = "block";
+        }
+    });
+    MuestraToast();
+
+
+</script>

@@ -1,0 +1,162 @@
+﻿<link async="async" rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/fonts/iconic/css/material-design-iconic-font.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/animate/animate.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/css-hamburgers/hamburgers.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/animsition/css/animsition.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/select2/select2.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/daterangepicker/daterangepicker.css">
+
+<div id="popup" style="display: none;">
+    <div class="content-popup">
+        <div class="close-comments">
+            <a href="#" id="clo" onclick="closepopup();">
+                <span class="fa fa-close" style="color: red;"></span>
+            </a>
+        </div>
+        <div>
+            <h2>Agregar comentario</h2>
+            <div class="field">
+                <div class="control">
+                    <textarea id="textareaPopUp" style="width:100%; height: 130px; border: 1px solid black" class="form-control" placeholder="Agregar comentario"></textarea>
+                </div>
+            </div>
+            <br />
+            <div style="float: right;">
+                <input style="background-color: black; color:white;" onclick="NoAplica();" class="btn" type="button" name="btnCancelar" value="N/A" />
+                <input style="background-color: #e93e3e; color:white;" onclick="eliminaComentario();" class="btn" type="button" name="btnCancelar" value="Cancelar" />
+                @*<input style="background-color: #8e14ec; color:white;" onclick="eliminaComentario();" class="btn" type="button" name="btnCancelar" value="Eliminar" />*@
+                <input style="background-color: forestgreen; color:white;" onclick="guardaComentario();" class="btn" type="button" name="btnGuardar" value="Guardar" />
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="popup-overlay-comments"></div>
+
+<div id="popupQr" style="display: none;">
+    <div class="content-popup-Qr">
+        <div class="close-comments">
+            <a href="#" id="clo" onclick="Closes();">
+                <span class="fa fa-close" style="color: red;"></span>
+            </a>
+        </div>
+        <div>
+            <div id="app">
+                <div class="sidebar">
+                    <section class="cameras">
+                        <h2>Cámaras</h2>
+                        <ul>
+                            <li v-if="cameras.length === 0" class="empty">Cámaras no encontradas</li>
+                            <li v-for="camera in cameras">
+                                <span v-if="camera.id == activeCameraId" :title="formatName(camera.name)" class="active">{{ formatName(camera.name) }}</span>
+                                <span v-if="camera.id != activeCameraId" :title="formatName(camera.name)">
+                                    <a click.stop="selectCamera(camera)">{{ formatName(camera.name) }}</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </section>
+
+                </div>
+                <div class="preview-container">
+                    <video style="width: 100%; height: 100%;" id="preview"></video>
+                </div>
+            </div>
+            <div style="width: 100%;">
+                <input style="background-color: #ffffff; cursor: text; color:black; width: 75%; border: 1px solid black" id="inputCodigo" class="btn" type="text" />
+                <input style="background-color: green; color:white; width: 20%;" class="btn" type="button" onclick="BuscaTeam();" id="btnSearch" value="Buscar" />
+            </div>
+            <div style="float:left; width:100%;"> </div>
+        </div>
+    </div>
+</div>
+<div class="popup-overlay"></div>
+
+<div id="loading-screen" style="display:none">
+    <img src="~/Content/images/spinning-circles.svg">
+</div>
+
+
+<div id="popupFirma" style="display: none;">
+    <div class="content-popup-firma">
+        <div class="closeFirma">
+            <a href="#" id="clo" onclick="closepopupFirma();">
+                <span class="fa fa-close" style="color: red;"></span>
+            </a>
+        </div>
+        <div>
+            <form class="login100-form validate-form">
+                <span class="login100-form-logo">
+                    <i><img src="~/Content/images/toslogo.png" width="300" height="140" alt="Alternate Text" /></i>
+                </span>
+                <span class="login100-form-title p-b-10">
+                    Pasar batch...
+                </span>
+                <div style="width: 100%;">
+                    <input id="WIWBatch" autofocus="autofocus" autocomplete="off" style="background-color: #ffffff; cursor: text; color:black; width: 75%; border: 1px solid black; font-size:15px; font-weight: bold;" type="password" class="btn"/>
+                    <input style="background-color: green; color:white; width: 20%;" class="btn" type="button" onclick="FirmaBatch();" id="btnSearch" value="Firmar" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="popup-overlay-Firma"></div>
+
+
+<div id="popupAddUser" style="display: none;">
+    <div class="content-popup-AddUser">
+        <div class="closeAddUser">
+            <a href="#" id="clo" onclick="closeAddUser();">
+                <span class="fa fa-close" style="color: red;"></span>
+            </a>
+        </div>
+        <div>
+            <div class="testbox">
+                <h1>Registrar Usuario</h1>
+
+                <form action="/">
+                    <hr>
+                    <div class="gender">
+                        <h4><b>Tipo de usuario:</b></h4>
+                        <input type="radio" value="ADMIN" id="admin" name="gender" onclick="muestraAccesos();" />
+                        <label for="admin" class="radio" chec>ADMIN</label>
+                        <input type="radio" checked value="TOS" id="tos" name="gender" onclick="muestraAccesos();" />
+                        <label for="tos" class="radio">TOS</label>
+                        <input type="radio" value="TL" id="tl" name="gender" onclick="muestraAccesos();" />
+                        <label for="tl" class="radio">TL</label>
+                    </div>
+                    <hr>
+                    <label id="icon" for="name"><i class="fa fa-address-card"></i></label>
+                    <input class="inputRegister" type="text" name="name" id="wiwAdd" placeholder="WIW" required />
+                    <br><br />
+                    <hr />
+                    <div id="AccesosAud" style="display: block">
+                        <h4><b>Acceso a auditorías:</b></h4>
+                        <div class="accounttype">
+                            <label class="containerCheck">
+                                Auditorías diarias y de pizarrón de TL
+                                <input id="AudDiaria" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="containerCheck">
+                                Auditoría Back Two Basic
+                                <input id="AudB2B" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="containerCheck">
+                                Auditoría Look & See
+                                <input id="AudLNS" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <a href="#" class="button" onclick="BuscaWIW();">Registrar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup-overlay-AddUser"></div>

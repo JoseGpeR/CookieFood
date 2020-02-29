@@ -1,0 +1,46 @@
+﻿<!-- Login -->
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/fonts/iconic/css/material-design-iconic-font.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/animate/animate.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/css-hamburgers/hamburgers.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/animsition/css/animsition.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/select2/select2.min.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/vendor/daterangepicker/daterangepicker.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+<link async="async" rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('../Content/images/e-trucks.jpg');">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form">
+                <span class="login100-form-logo">
+                    <i><img src="~/Content/images/toslogo.png" width="400" height="200" alt="Alternate Text" /></i>
+                </span>
+
+                <span class="login100-form-title p-b-20">
+                    Truck Operating System
+                </span>
+                <div class="wrap-input100 validate-input" data-validate="Ingrese nombre de usuario">
+                    <input id="WIW" class="input100" style="color:black;" type="text" name="username" placeholder="Usuario" />
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Ingrese contraeña">
+                    <input id="PSW" class="input100" type="password" name="pass" placeholder="Contraseña" />
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                </div>
+
+                <div class="container-login100-form-btn" style="text-align: center">
+                    <input type="button" class="login100-form-btn" onclick="Login();" value="Entrar" />
+                    <input style="margin-left: 10%" type="button" class="login100-form-btn" value="Cliente" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="toastInicio">Por favor, inicia sesión.</div>
+<div id="toastIncorrect">¡Ups! Usuario/Contraseña incorrectos.</div>
+
+<script>
+    ToastInicio();
+</script>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>TOS System</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/Content/css/estilos.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.ico" />
+    <!-- Template -->
+    <link async="async" rel="stylesheet" href="~/Content/bower_components/morris.js/morris.css">
+    <link async="async" rel="stylesheet" href="~/Content/bower_components/morris.js/morris.css">
+    <link async="async" rel="stylesheet" href="~/Content/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link async="async" rel="stylesheet" href="~/Content/bower_components/font-awesome/css/font-awesome.min.css">
+    <link async="async" rel="stylesheet" href="~/Content/bower_components/Ionicons/css/ionicons.min.css">
+    <link async="async" rel="stylesheet" href="~/Content/dist/css/AdminLTE.min.css">
+    <link async="async" rel="stylesheet" href="~/Content/dist/css/skins/skin-blue.min.css">
+    <script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Toast de mensajes -->
+    <script type="text/javascript" src="~/Content/js/Login.js"></script>
+
+    <!-- Login -->
+    <script type="text/javascript" src="~/Content/js/SharedJs.js"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    @RenderBody()
+
+    @Html.Partial("~/Views/Shared/PopUp.cshtml")
+
+    <!-- AdminLTE App -->
+    <script src="~/Content/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Content/dist/js/adminlte.min.js"></script>
+    @*<script type="text/javascript" src="~/Content/js/Scanner.js"></script>*@
+    @*<link rel="stylesheet" type="text/css" href="~/js/html5-qrcode.min.js">
+        <link rel="stylesheet" type="text/css" href="~/js/instascan.min.js">*@
+    @*<link rel="stylesheet" type="text/css" href="~/Content/js/jquery.js">*@
+
+
+</body>
+</html>
