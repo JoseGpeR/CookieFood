@@ -1,3 +1,133 @@
-﻿<div>
-    <h2>Hola mundo. Esta es la vista de Jose Guuadalupe</h2>
-</div>
+﻿<style>
+    .grid-containerEntradas {
+        display: grid !important;
+        width: 100%;
+        grid-template-columns: 12% 5% 12% 5% 12% 5% 12% 5% 10% 5% 12% 5%;
+        white-space: normal;
+        padding: 3px;
+        text-align: center;
+        grid-row-gap: 6px;
+    }
+
+    .grid-containerOpciones {
+        display: grid !important;
+        width: 100%;
+        grid-template-columns: repeat(6, auto);
+        white-space: normal;
+        padding: 3px;
+        text-align: center;
+    }
+
+    .grid-item {
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        border-radius: 3px;
+        padding: 5px;
+        color: black;
+        background: white;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        word-wrap: break-word;
+        min-height: 40px;
+    }
+
+    .grid-itemBotones {
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        border-radius: 3px;
+        padding: 5px;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        word-wrap: break-word;
+        min-height: 35px;
+        cursor: pointer;
+    }
+
+    .grid-price {
+        background-color: #299d08;
+        color: white;
+        text-align: center;
+    }
+</style>
+<section class="content container-fluid">
+    <div class="grid-containerOpciones">
+        <div class='grid-itemBotones' onclick="MuestraContenedor('contEntradas')" style="background-color: #299d08;">
+            Entradas
+        </div>
+        <div class='grid-itemBotones' style="background-color: #92890b;">
+            Comidas
+        </div>
+        <div class='grid-itemBotones' style="background-color: #256990;">
+            Bebidas
+        </div>
+        <div class='grid-itemBotones' style="background-color: #ee7900;">
+            Cervezas
+        </div>
+        <div class='grid-itemBotones' style="background-color: #791919;">
+            Drinks
+        </div>
+        <div class='grid-itemBotones' style="background-color: #4b3838;">
+            Postres
+        </div>
+    </div>
+    <div style="margin-top:1%;">
+        <div id="contEntradas" style="display:none;">
+            <div class="grid-containerEntradas">
+            </div>
+        </div>
+        <div id="contComidas" style="display:none">
+            <div class="grid-containerComidas">
+            </div>
+        </div>
+        <div id="contBebidas" style="display:none">
+            <div class="grid-containerBebidas">
+            </div>
+        </div>
+        <div id="contCervezas" style="display:none">
+            <div class="grid-containerCervezas">
+            </div>
+        </div>
+        <div id="contDrinks" style="display:none">
+            <div class="grid-containerDrinks">
+            </div>
+        </div>
+        <div id="contPostres" style="display:none">
+            <div class="grid-containerPostres">
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    console.log("");
+    function opcionesMenu() {
+        var url = '/Client/Menu';
+        var screen = $('#loading-screen');
+        configureLoadingScreen(screen);
+        $.get(url).done(function (data) {
+            RellenaMenu(data);
+        });
+    }
+
+    function RellenaMenu(data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].TYPE_FOOD == "Entrada") {
+                $(".grid-containerEntradas").append("<div class='grid-item'>" + data[i].DESCRIPCION + "</div>");
+                $(".grid-containerEntradas").append("<div class='grid-item grid-price'>$" + data[i].PRICE + "</div>");
+            }
+        }
+        
+    }
+
+    function MuestraContenedor(contenedorid) {
+        OcultaContenedor();
+        $('#' + contenedorid).css('display','block');
+    }
+
+    function OcultaContenedor() {
+        var identificadores = ['Entradas','Comidas','Bebidas','Cervezas','Drinks','Postres'];
+        for (var i = 0; i < 7; i++) {
+            $('#' + identificadores[i]).css('display','none');
+        }
+    }
+    opcionesMenu();
+</script>
